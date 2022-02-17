@@ -1,0 +1,56 @@
+config:
+    module_name: non_profits
+    data_name: non_profit
+    parent_data_name: organization
+
+pre_run:
+    data_fields:
+        _config:
+            ein:
+                type: string
+            class:
+                type: string
+            public_private:
+                type: string
+            category:
+                type: string
+            major_group:
+                type: string
+            sub_group:
+                type: string
+            purpose:
+                type: string
+
+run:
+    admin_role:
+        _command: template generate
+        module_name: "@module_name"
+        module_template: user/role
+        template_fields:
+            name: "@{data_name}-admin"
+            help: "#capitalize(@data_name) administrator"
+
+    non_profit_model:
+        _command: template generate
+        module_name: "@module_name"
+        module_template: data/model
+        template_fields:
+            name: "@data_name"
+            base: "@parent_data_name"
+            extend: True
+            admin_roles: [ "@{parent_data_name}-admin", "@{data_name}-admin" ]
+            view_roles: public
+            resource_priority: 80
+            command_mixins: "@parent_data_name"
+            mixin_priority: 5
+
+    "<<dict_key>>_field":
+        _command: template generate
+        _requires: non_profit_model
+        _foreach: "@data_fields"
+        module_name: "@module_name"
+        module_template: "field/<<type>>"
+        template_fields:
+            data_name: "@data_name"
+            field_name: "<<dict_key>>"
+            "<<options>>":
