@@ -1,0 +1,5 @@
+name: non-profits
+
+modules:
+    - remote: https://github.com/Polydelta-ai/zimagi-organizations.git
+      reference: main
