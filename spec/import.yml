@@ -1,0 +1,55 @@
+_nccs_bmf_import: &nccs_bmf_import
+    source: csv_file
+    data:
+        non_profit:
+            map:
+                name:
+                    column: NAME
+                    validators:
+                        string:
+                            empty: false
+                ein:
+                    column: EIN
+                    validators:
+                        string:
+                            empty: false
+                city:
+                    column: CITY
+                    validators:
+                        string:
+                            empty: false
+                state:
+                    column: STATE
+                    validators:
+                        string:
+                            empty: false
+                zipcode:
+                    column: ZIP5
+                    validators:
+                        string:
+                            empty: false
+                public_private:
+                    column: LEVEL1
+                    formatter: nccs_public_private_label
+                category:
+                    column: LEVEL3
+                    formatter: nccs_category_label
+                class:
+                    column: NTEE1
+                    formatter: nccs_sub_group_label
+                major_group:
+                    column: NTMAJ12
+                    formatter: nccs_major_group_label
+                sub_group:
+                    column: SUBSECCD
+                    formatter: nccs_sub_group_label
+                purpose:
+                    column: NTEEFINAL
+                    formatter: nccs_purpose_label
+
+import:
+    nccs-bmf-2020:
+        <<: *nccs_bmf_import
+        file: https://nccs-data.urban.org/dl.php?f=bmf/2020/bmf.bm2004.csv
+        tags: [organization, non_profit, bmf, 2020]
+        disable_save: true
