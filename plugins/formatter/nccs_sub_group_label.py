@@ -47,4 +47,6 @@ class Provider(BaseProvider('formatter', 'nccs_sub_group_label')):
     }
 
     def format(self, value, record):
+        if value is None:
+            return value
         return self.labels[value]

@@ -24,4 +24,6 @@ class Provider(BaseProvider('formatter', 'nccs_category_label')):
     }
 
     def format(self, value, record):
+        if value is None:
+            return value
         return self.labels[value]
