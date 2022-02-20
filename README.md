@@ -3,7 +3,7 @@
 </p>
 <hr/>
 
-<h1 align="center">Non Profit Data Module</h1>
+<h1 align="center"><b>Non Profit</b> <i>Data Module</i></h1>
 <br/>
 
 ## Dependencies
