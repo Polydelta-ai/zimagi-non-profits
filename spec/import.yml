@@ -52,4 +52,3 @@ import:
         <<: *nccs_bmf_import
         file: https://nccs-data.urban.org/dl.php?f=bmf/2020/bmf.bm2004.csv
         tags: [organization, non_profit, bmf, 2020]
-        disable_save: true
