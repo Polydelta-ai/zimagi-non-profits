@@ -1,0 +1,110 @@
+data_mixins:
+  non_profit:
+    class: NonProfitMixin
+    fields:
+      non_profit:
+        type: '@django.ForeignKey'
+        relation: non_profit
+        options:
+          on_delete: '@django.PROTECT'
+  non_profit_optional:
+    class: NonProfitOptionalMixin
+    fields:
+      non_profit:
+        type: '@django.ForeignKey'
+        relation: non_profit
+        options:
+          on_delete: '@django.SET_NULL'
+          'null': true
+  non_profits:
+    class: NonProfitMultipleMixin
+    fields:
+      non_profits:
+        type: '@django.ManyToManyField'
+        relation: non_profit
+        options:
+          blank: true
+data_base:
+  non_profit:
+    class: NonProfitBase
+    base: id_resource
+    mixins:
+    - non_profit
+    id_fields:
+    - non_profit_id
+    - name
+    meta:
+      unique_together:
+      - non_profit
+      - name
+      scope: non_profit
+data:
+  non_profit:
+    class: NonProfit
+    extend: organization
+    api: true
+    display: <name>
+    roles:
+      edit:
+      - non-profit-admin
+      view:
+      - non-profit-auditor
+    fields:
+      purpose:
+        type: '@django.CharField'
+        options:
+          'null': true
+          default: null
+          max_length: 256
+          editable: true
+          system: false
+      ein:
+        type: '@django.CharField'
+        options:
+          'null': true
+          default: null
+          max_length: 256
+          editable: true
+          system: false
+      class:
+        type: '@django.CharField'
+        options:
+          'null': true
+          default: null
+          max_length: 256
+          editable: true
+          system: false
+      category:
+        type: '@django.CharField'
+        options:
+          'null': true
+          default: null
+          max_length: 256
+          editable: true
+          system: false
+      major_group:
+        type: '@django.CharField'
+        options:
+          'null': true
+          default: null
+          max_length: 256
+          editable: true
+          system: false
+      public_private:
+        type: '@django.CharField'
+        options:
+          'null': true
+          default: null
+          max_length: 256
+          editable: true
+          system: false
+      sub_group:
+        type: '@django.CharField'
+        options:
+          'null': true
+          default: null
+          max_length: 256
+          editable: true
+          system: false
+    meta:
+      unique_together: []
