@@ -1,7 +1,37 @@
 _nccs_bmf_import: &nccs_bmf_import
     source: csv_file
     data:
+        location:
+            map:
+                city:
+                    column: CITY
+                    validators:
+                        string:
+                            empty: false
+                    formatter:
+                        provider: capitalize
+                        words: true
+                state:
+                    column: STATE
+                    validators:
+                        string:
+                            empty: false
+                    formatter: upper
+                zipcode:
+                    column: ZIP5
+                    validators:
+                        number:
+                            empty: false
         non_profit:
+            requires: [location]
+            relations:
+                location_id:
+                    data: location
+                    required: true
+                    scope:
+                        city: CITY
+                        state: STATE
+                        zipcode: ZIP5
             map:
                 name:
                     column: NAME
@@ -11,22 +41,7 @@ _nccs_bmf_import: &nccs_bmf_import
                 ein:
                     column: EIN
                     validators:
-                        string:
-                            empty: false
-                city:
-                    column: CITY
-                    validators:
-                        string:
-                            empty: false
-                state:
-                    column: STATE
-                    validators:
-                        string:
-                            empty: false
-                zipcode:
-                    column: ZIP5
-                    validators:
-                        string:
+                        number:
                             empty: false
                 public_private:
                     column: LEVEL1
