@@ -57,55 +57,7 @@ data:
       view:
       - non-profit-auditor
     fields:
-      class:
-        type: '@django.CharField'
-        options:
-          'null': true
-          default: null
-          max_length: 256
-          editable: true
-          system: false
-      sub_group:
-        type: '@django.CharField'
-        options:
-          'null': true
-          default: null
-          max_length: 256
-          editable: true
-          system: false
-      purpose:
-        type: '@django.CharField'
-        options:
-          'null': true
-          default: null
-          max_length: 256
-          editable: true
-          system: false
-      major_group:
-        type: '@django.CharField'
-        options:
-          'null': true
-          default: null
-          max_length: 256
-          editable: true
-          system: false
-      category:
-        type: '@django.CharField'
-        options:
-          'null': true
-          default: null
-          max_length: 256
-          editable: true
-          system: false
       ein:
-        type: '@django.CharField'
-        options:
-          'null': true
-          default: null
-          max_length: 256
-          editable: true
-          system: false
-      public_private:
         type: '@django.CharField'
         options:
           'null': true
