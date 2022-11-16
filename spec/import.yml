@@ -1,5 +1,42 @@
+_nccs_index_import: &nccs_index_import
+    source: csv_file
+    tags: [non_profit, nccs]
+
+_nccs_index_label_map: &nccs_index_label_map
+    map:
+        name:
+            column: id
+            validators:
+                string:
+                    empty: false
+        label:
+            column: label
+            validators:
+                string:
+                    empty: false
+
+_nccs_index_text_map: &nccs_index_text_map
+    map:
+        name:
+            column: id
+            validators:
+                string:
+                    empty: false
+        text:
+            column: text
+            validators:
+                string:
+                    empty: false
+
 _nccs_bmf_import: &nccs_bmf_import
     source: csv_file
+    requires:
+        - nccs_type
+        - nccs_class
+        - nccs_category
+        - nccs_major_group
+        - nccs_sub_group
+        - nccs_purpose
     data:
         location:
             map:
@@ -29,9 +66,33 @@ _nccs_bmf_import: &nccs_bmf_import
                     data: location
                     required: true
                     scope:
-                        city: CITY
-                        state: STATE
+                        city: "#capitalize(CITY, words=true)"
+                        state: "#upper(STATE)"
                         zipcode: ZIP5
+                nccs_type_id:
+                    data: nccs_type
+                    required: true
+                    column: LEVEL1
+                nccs_class_id:
+                    data: nccs_class
+                    required: true
+                    column: NTEE1
+                nccs_category_id:
+                    data: nccs_category
+                    required: true
+                    column: LEVEL3
+                nccs_major_group_id:
+                    data: nccs_major_group
+                    required: true
+                    column: NTMAJ12
+                nccs_sub_group_id:
+                    data: nccs_sub_group
+                    required: true
+                    column: SUBSECCD
+                nccs_purpose_id:
+                    data: nccs_purpose
+                    required: true
+                    column: NTEEFINAL
             map:
                 name:
                     column: NAME
@@ -43,26 +104,50 @@ _nccs_bmf_import: &nccs_bmf_import
                     validators:
                         number:
                             empty: false
-                public_private:
-                    column: LEVEL1
-                    formatter: nccs_public_private_label
-                category:
-                    column: LEVEL3
-                    formatter: nccs_category_label
-                class:
-                    column: NTEE1
-                    formatter: nccs_sub_group_label
-                major_group:
-                    column: NTMAJ12
-                    formatter: nccs_major_group_label
-                sub_group:
-                    column: SUBSECCD
-                    formatter: nccs_sub_group_label
-                purpose:
-                    column: NTEEFINAL
-                    formatter: nccs_purpose_label
 
 import:
+    nccs_type:
+        <<: *nccs_index_import
+        file: imports/nccs_type.csv
+        data:
+            nccs_type:
+                <<: *nccs_index_label_map
+
+    nccs_class:
+        <<: *nccs_index_import
+        file: imports/nccs_class.csv
+        data:
+            nccs_class:
+                <<: *nccs_index_label_map
+
+    nccs_category:
+        <<: *nccs_index_import
+        file: imports/nccs_category.csv
+        data:
+            nccs_category:
+                <<: *nccs_index_label_map
+
+    nccs_major_group:
+        <<: *nccs_index_import
+        file: imports/nccs_major_group.csv
+        data:
+            nccs_major_group:
+                <<: *nccs_index_label_map
+
+    nccs_sub_group:
+        <<: *nccs_index_import
+        file: imports/nccs_sub_group.csv
+        data:
+            nccs_sub_group:
+                <<: *nccs_index_label_map
+
+    nccs_purpose:
+        <<: *nccs_index_import
+        file: imports/nccs_purpose.csv
+        data:
+            nccs_purpose:
+                <<: *nccs_index_text_map
+
     nccs_bmf_2020:
         <<: *nccs_bmf_import
         file: https://nccs-data.urban.org/dl.php?f=bmf/2020/bmf.bm2004.csv
