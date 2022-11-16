@@ -58,7 +58,6 @@ _nccs_bmf_import: &nccs_bmf_import
                     column: ZIP5
                     validators:
                         number:
-                            empty: false
         non_profit:
             requires: [location]
             relations:
