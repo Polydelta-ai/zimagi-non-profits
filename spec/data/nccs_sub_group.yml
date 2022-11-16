@@ -1,0 +1,61 @@
+data_mixins:
+  nccs_sub_group:
+    class: NccsSubGroupMixin
+    fields:
+      nccs_sub_group:
+        type: '@django.ForeignKey'
+        relation: nccs_sub_group
+        options:
+          on_delete: '@django.PROTECT'
+  nccs_sub_group_optional:
+    class: NccsSubGroupOptionalMixin
+    fields:
+      nccs_sub_group:
+        type: '@django.ForeignKey'
+        relation: nccs_sub_group
+        options:
+          on_delete: '@django.SET_NULL'
+          'null': true
+  nccs_sub_groups:
+    class: NccsSubGroupMultipleMixin
+    fields:
+      nccs_sub_groups:
+        type: '@django.ManyToManyField'
+        relation: nccs_sub_group
+        options:
+          blank: true
+data_base:
+  nccs_sub_group:
+    class: NccsSubGroupBase
+    base: id_resource
+    mixins:
+    - nccs_sub_group
+    id_fields:
+    - nccs_sub_group_id
+    - name
+    meta:
+      unique_together:
+      - nccs_sub_group
+      - name
+      scope: nccs_sub_group
+data:
+  nccs_sub_group:
+    class: NccsSubGroup
+    base: name_resource
+    api: true
+    display: <name> (<label>)
+    roles:
+      edit:
+      - non-profit-admin
+      view:
+      - non-profit-auditor
+    fields:
+      label:
+        type: '@django.CharField'
+        options:
+          'null': true
+          default: null
+          max_length: 256
+          editable: true
+          system: false
+    meta: null

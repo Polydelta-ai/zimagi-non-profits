@@ -7,24 +7,73 @@ roles:
     non-profit-auditor: Non-profit auditor (viewing privileges over all non-profits)
 
 models:
+    nccs_type:
+        <<: *base_model
+        base: name_resource
+        display: "<name> (<label>)"
+        priority: 70
+        fields:
+            label:
+                type: string
+
+    nccs_class:
+        <<: *base_model
+        base: name_resource
+        display: "<name> (<label>)"
+        priority: 70
+        fields:
+            label:
+                type: string
+
+    nccs_category:
+        <<: *base_model
+        base: name_resource
+        display: "<name> (<label>)"
+        priority: 70
+        fields:
+            label:
+                type: string
+
+    nccs_major_group:
+        <<: *base_model
+        base: name_resource
+        display: "<name> (<label>)"
+        priority: 70
+        fields:
+            label:
+                type: string
+
+    nccs_sub_group:
+        <<: *base_model
+        base: name_resource
+        display: "<name> (<label>)"
+        priority: 70
+        fields:
+            label:
+                type: string
+
+    nccs_purpose:
+        <<: *base_model
+        base: name_resource
+        display: "<name> (<text>)"
+        priority: 70
+        fields:
+            text:
+                type: text
+
     non_profit:
         <<: *base_model
         base: organization
         extend: true
+        mixins:
+            - nccs_type
+            - nccs_class
+            - nccs_category
+            - nccs_major_group
+            - nccs_sub_group
+            - nccs_purpose
         display: "<name>"
         priority: 70
         fields:
             ein:
-                type: string
-            class:
-                type: string
-            public_private:
-                type: string
-            category:
-                type: string
-            major_group:
-                type: string
-            sub_group:
-                type: string
-            purpose:
                 type: string

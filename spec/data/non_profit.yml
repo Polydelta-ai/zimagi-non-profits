@@ -42,6 +42,13 @@ data:
   non_profit:
     class: NonProfit
     extend: organization
+    mixins:
+    - nccs_type
+    - nccs_class
+    - nccs_category
+    - nccs_major_group
+    - nccs_sub_group
+    - nccs_purpose
     api: true
     display: <name>
     roles:
@@ -50,22 +57,6 @@ data:
       view:
       - non-profit-auditor
     fields:
-      purpose:
-        type: '@django.CharField'
-        options:
-          'null': true
-          default: null
-          max_length: 256
-          editable: true
-          system: false
-      ein:
-        type: '@django.CharField'
-        options:
-          'null': true
-          default: null
-          max_length: 256
-          editable: true
-          system: false
       class:
         type: '@django.CharField'
         options:
@@ -74,7 +65,15 @@ data:
           max_length: 256
           editable: true
           system: false
-      category:
+      sub_group:
+        type: '@django.CharField'
+        options:
+          'null': true
+          default: null
+          max_length: 256
+          editable: true
+          system: false
+      purpose:
         type: '@django.CharField'
         options:
           'null': true
@@ -90,7 +89,7 @@ data:
           max_length: 256
           editable: true
           system: false
-      public_private:
+      category:
         type: '@django.CharField'
         options:
           'null': true
@@ -98,7 +97,15 @@ data:
           max_length: 256
           editable: true
           system: false
-      sub_group:
+      ein:
+        type: '@django.CharField'
+        options:
+          'null': true
+          default: null
+          max_length: 256
+          editable: true
+          system: false
+      public_private:
         type: '@django.CharField'
         options:
           'null': true

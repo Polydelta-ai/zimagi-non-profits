@@ -7,7 +7,7 @@ command_mixins:
     non_profit:
         aliases: ["non_profit_optional"]
         class: NonProfitMixin
-        mixins: ['organization']
+        mixins: ['organization', 'nccs_type', 'nccs_class', 'nccs_category', 'nccs_major_group', 'nccs_sub_group', 'nccs_purpose']
         meta:
             non_profit:
                 data: non_profit
@@ -15,7 +15,7 @@ command_mixins:
 
     non_profits:
         class: NonProfitMultipleMixin
-        mixins: ['organization']
+        mixins: ['organization', 'nccs_type', 'nccs_class', 'nccs_category', 'nccs_major_group', 'nccs_sub_group', 'nccs_purpose']
         meta:
             non_profits:
                 data: non_profit
