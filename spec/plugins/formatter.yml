@@ -1,9 +1,0 @@
-plugin:
-    formatter:
-        providers:
-            nccs_public_private_label:
-            nccs_major_group_label:
-            nccs_sub_group_label:
-            nccs_class_label:
-            nccs_category_label:
-            nccs_purpose_label:
